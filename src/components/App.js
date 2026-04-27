@@ -7,36 +7,23 @@ import {
   Link
 } from "react-router-dom";
 
-// Private Route Component
 function PrivateRoute({ isAuthenticated, children }) {
   return isAuthenticated ? children : <Navigate to="/login" />;
 }
 
-// Login Component
 function Login({ handleLogin }) {
   return (
     <div className="main-container">
-      <h2>Login Page</h2>
-      <button onClick={handleLogin}>Login</button>
+      <h2>Log In</h2>
+      <button onClick={handleLogin}>Log In</button>
     </div>
   );
 }
 
-// Home Component (Private Route)
-function Home() {
+function Playground() {
   return (
     <div className="main-container">
-      <h2>Code Playground</h2>
-      <p>Welcome! You are logged in.</p>
-    </div>
-  );
-}
-
-// Not Found Page
-function NotFound() {
-  return (
-    <div className="main-container">
-      <h2>Page not Found</h2>
+      <h2>Hi Welcome to Code PlayGround</h2>
     </div>
   );
 }
@@ -53,7 +40,7 @@ export default function App() {
       <div className="main-container">
         <p>
           {isAuthenticated
-            ? "You are authenticated"
+            ? "Logged in, Now you can enter Playground"
             : "You are not authenticated, Please login first"}
         </p>
 
@@ -62,7 +49,7 @@ export default function App() {
             <Link to="/">PlayGround</Link>
           </li>
           <li>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Log In</Link>
           </li>
         </ul>
 
@@ -71,7 +58,7 @@ export default function App() {
             path="/"
             element={
               <PrivateRoute isAuthenticated={isAuthenticated}>
-                <Home />
+                <Playground />
               </PrivateRoute>
             }
           />
@@ -80,8 +67,6 @@ export default function App() {
             path="/login"
             element={<Login handleLogin={handleLogin} />}
           />
-
-          <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
     </Router>
